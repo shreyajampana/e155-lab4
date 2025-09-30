@@ -16,6 +16,8 @@
 #define TIM15_BASE (0x40014000UL) // base address of TIM15
 #define TIM16_BASE (0x40014400UL) // base address of TIM16
 
+#define TICKS_PER_MS    10000
+
 
 typedef struct
 {
