@@ -16,7 +16,8 @@
 #define TIM15_BASE (0x40014000UL) // base address of TIM15
 #define TIM16_BASE (0x40014400UL) // base address of TIM16
 
-#define TICKS_PER_MS    10000
+#define TICKS_PER_MS_DELAY    10
+#define TICKS_PER_MS_FREQ     10000
 
 
 typedef struct
@@ -55,9 +56,9 @@ typedef struct
 // Function prototypes
 ///////////////////////////////////////////////////////////////////////////////
 
-void initTIM(TIM_TypeDef * TIM15);
-void delay_millis(TIM_TypeDef * TIM15, uint32_2 ms);
-void initPWM(TIM_TypeDef * TIM16);
-void setFreq(TIM_TypeDef * TIM16, uint32_2 freq);
+void initTIM(TIM_TypeDef * TIMx);
+void delay_millis(TIM_TypeDef * TIMx, uint32_t ms);
+void initPWM(TIM_TypeDef * TIMx);
+void setFreq(TIM_TypeDef * TIMx, uint32_t freq);
 
 #endif
