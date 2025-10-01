@@ -2,12 +2,18 @@
 // Date: 9/29/25
 // Description:
 
-//Including the header files
-#include "STM32L432KC_TIM.h"
-#include "STM32L432KC_RCC.h"
-#include "STM32L432KC_GPIO.h"
-#include "STM32L432KC_FLASH.h"
+#include "C:\Users\sjampana\e155-lab4-main\mcu\lib\STM32L432KC_TIM.h"
+#include "C:\Users\sjampana\e155-lab4-main\mcu\lib\STM32L432KC_RCC.h"
+#include "C:\Users\sjampana\e155-lab4-main\mcu\lib\STM32L432KC_GPIO.h"
+#include "C:\Users\sjampana\e155-lab4-main\mcu\lib\STM32L432KC_FLASH.h"
 
+/*********************************************************************
+*
+*       main()
+*
+*  Function description
+*   Application entry point.
+*/
 //Fur Elise from starter code
 //Pitch in Hz, duration in ms
 const int notes[][2] = {
@@ -135,22 +141,24 @@ int main(void) {
     RCC->APB2ENR |= (1 << 16);
     RCC->APB2ENR |= (1 << 17);
 
-    // Setting PA6 to be GPIOA 
-    GPIOA->AFRL |= (0b1110 << 24)
-
     // Configuring the GPIOA pin
     pinMode(6, GPIO_ALT);
+
+    // Setting PA6 to be GPIOA 
+    GPIO->AFRL &= ~(0b1111 << 24);
+    GPIO->AFRL |= (0b1110 << 24);
 
     // Configure timers 15 and 16
     initTIM(TIM15);
     initPWM(TIM16);
 
-    size_t length = sizeof(notes) / sizeof(notes[0]);
+
+    int length = sizeof(notes) / sizeof(notes[0]);
 
     // Writing the for loops
-    for (int i = 0; i < length; i++) {
+    for (int i = 0; i <= length; i++) {
+        setFreq(TIM16, notes[i][0]);
         delay_millis(TIM15, notes[i][1]);
-        initPWM(TIM16, notes[i][0]);
     }
 	
 } 
