@@ -1,6 +1,7 @@
 // Shreya Jampana
 // Date: 9/29/25
-// Description:
+// This is the file that configures timers 15 and 16 and the GPIO pins,
+// and plays Fur Elise and Hedwig's theme from Harry Potter. 
 
 //Includes for the libraries
 #include "C:\Users\sjampana\e155-lab4-main\mcu\lib\STM32L432KC_TIM.h"
@@ -10,6 +11,7 @@
 
 
 //Fur Elise from starter code
+//Hedwig's theme as well
 //Pitch in Hz, duration in ms
 const int notes[][2] = {
 {659,	125},
@@ -120,9 +122,7 @@ const int notes[][2] = {
 {523,	125},
 {494,	125},
 {440,	500},
-{  0,	0}};
-
-const float hedwig[][2] = {
+{  0,	500},
 {246.9,	250},
 {329.6,	375},
 {392,	125},
@@ -156,6 +156,40 @@ const float hedwig[][2] = {
 {329.6,	750},
 {  0,	0}};
 
+// const float hedwig[][2] = {
+// {246.9,	250},
+// {329.6,	375},
+// {392,	125},
+// {370,	250},
+// {329.6,	500},
+// {493.9,	250},
+// {440,	750},
+// {370,	750},
+// {329.6,	375},
+// {392,	125},
+// {370,	250},
+// {311.1,	500},
+// {349.2,	250},
+// {246.9,	750},
+// {  0,	500},
+// {246.9,	250},
+// {329.6,	375},
+// {392,	125},
+// {370,	250},
+// {329.6,	500},
+// {987.77, 250},
+// {587.3,	500},
+// {554.4,	250},
+// {523.3,	125},
+// {415.3,	250},
+// {523.3,	375},
+// {493.9,	125},
+// {466.2,	250},
+// {233.08, 500},
+// {392,	250},
+// {329.6,	750},
+// {  0,	0}};
+
 int main(void) {
 	// Configure flash to add waitstates to avoid timing errors
     configureFlash();
@@ -181,9 +215,8 @@ int main(void) {
     initTIM(TIM15);
     initPWM(TIM16);
 
-
     int length = sizeof(notes) / sizeof(notes[0]);
-    int length_hedwig = sizeof(hedwig) / sizeof(hedwig[0]);
+    // int length_hedwig = sizeof(hedwig) / sizeof(hedwig[0]);
 
     // Writing the for loops
     for (int i = 0; i <= length; i++) {
@@ -191,9 +224,9 @@ int main(void) {
         delay_millis(TIM15, notes[i][1]);
     }
 
-    for (int i = 0; i <= length_hedwig; i++) {
-        setFreq(TIM16, hedwig[i][0]);
-        delay_millis(TIM15, hedwig[i][1]);
-    }
+    // for (int i = 0; i <= length_hedwig; i++) {
+    //     setFreq(TIM16, hedwig[i][0]);
+    //     delay_millis(TIM15, hedwig[i][1]);
+    // }
 	
 } 
